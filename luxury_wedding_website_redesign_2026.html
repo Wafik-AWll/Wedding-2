@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AHMED & AMIRA — Wedding Day</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --bg: #0f0f0f;
+      --gold: #d4b483;
+      --soft: #ece7df;
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.7);
+      --card: rgba(255,255,255,0.05);
+      --border: rgba(255,255,255,0.12);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.65)),
+        url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1600&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      z-index: -2;
+      transform: scale(1.05);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.25);
+      backdrop-filter: blur(2px);
+      z-index: -1;
+    }
+
+    nav {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 24px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 999;
+      background: rgba(0,0,0,0.25);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    nav h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      letter-spacing: 4px;
+      font-weight: 500;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      margin-left: 24px;
+      font-size: 14px;
+      opacity: 0.85;
+      transition: .3s ease;
+    }
+
+    nav a:hover {
+      color: var(--gold);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    .hero-content {
+      animation: fadeUp 1.2s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .tag {
+      letter-spacing: 5px;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(70px, 12vw, 150px);
+      line-height: 0.95;
+      font-weight: 500;
+      letter-spacing: 3px;
+    }
+
+    .hero p {
+      margin-top: 25px;
+      color: var(--muted);
+      font-size: 18px;
+      letter-spacing: 1px;
+    }
+
+    .date {
+      margin-top: 35px;
+      font-size: 16px;
+      letter-spacing: 5px;
+      color: var(--gold);
+    }
+
+    .btn {
+      margin-top: 40px;
+      display: inline-block;
+      padding: 16px 34px;
+      border: 1px solid var(--gold);
+      color: var(--soft);
+      text-decoration: none;
+      border-radius: 50px;
+      transition: .35s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .btn:hover {
+      background: var(--gold);
+      color: #000;
+      transform: translateY(-3px);
+    }
+
+    section {
+      padding: 120px 8%;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 64px;
+      text-align: center;
+      margin-bottom: 60px;
+      font-weight: 500;
+    }
+
+    .story {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+      gap: 40px;
+      align-items: center;
+    }
+
+    .story img {
+      width: 100%;
+      border-radius: 28px;
+      object-fit: cover;
+      min-height: 520px;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+    }
+
+    .story-text {
+      background: var(--card);
+      padding: 45px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    .story-text h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .story-text p {
+      line-height: 1.9;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .countdown-wrapper {
+      text-align: center;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+      gap: 22px;
+      margin-top: 40px;
+    }
+
+    .count-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 35px 20px;
+      backdrop-filter: blur(10px);
+      transition: .3s ease;
+    }
+
+    .count-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .count-card h2 {
+      font-size: 48px;
+      color: var(--gold);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .count-card p {
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 25px;
+    }
+
+    .detail-card {
+      padding: 40px;
+      border-radius: 30px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      transition: .35s ease;
+    }
+
+    .detail-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .detail-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      margin-bottom: 18px;
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    .detail-card p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 22px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      border-radius: 28px;
+      transition: .4s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .gallery img:hover {
+      transform: scale(1.03);
+    }
+
+    footer {
+      text-align: center;
+      padding: 60px 20px 80px;
+      color: rgba(255,255,255,0.6);
+      font-size: 14px;
+    }
+
+    .music-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(12px);
+      color: white;
+      cursor: pointer;
+      z-index: 1000;
+      font-size: 20px;
+      transition: .3s ease;
+    }
+
+    .music-btn:hover {
+      transform: scale(1.1);
+      background: rgba(255,255,255,0.15);
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media(max-width: 768px) {
+      nav {
+        padding: 20px 6%;
+      }
+
+      nav .links {
+        display: none;
+      }
+
+      .section-title {
+        font-size: 48px;
+      }
+
+      .hero h1 {
+        line-height: 1.05;
+      }
+
+      .story-text {
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <h2>A & A</h2>
+
+    <div class="links">
+      <a href="#story">Story</a>
+      <a href="#countdown">Countdown</a>
+      <a href="#details">Details</a>
+      <a href="#gallery">Gallery</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="tag">Together Forever</div>
+
+      <h1>
+        AHMED <br>
+        & AMIRA
+      </h1>
+
+      <p>
+        We invite you to celebrate our wedding day
+      </p>
+
+      <div class="date">
+        MAY 21, 2026
+      </div>
+
+      <a href="#details" class="btn">View Invitation</a>
+    </div>
+  </section>
+
+  <section id="story" class="reveal">
+    <h2 class="section-title">Our Story</h2>
+
+    <div class="story">
+      <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=1200&auto=format&fit=crop" alt="Couple">
+
+      <div class="story-text">
+        <h3>A Beautiful Beginning</h3>
+
+        <p>
+          Every love story is beautiful, but ours is our favorite. We met unexpectedly, laughed endlessly, and discovered in each other a home we never knew we were searching for.
+          <br><br>
+          This wedding is not only a celebration of love, but a celebration of friendship, trust, memories, and the future we are building together.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="countdown" class="countdown-wrapper reveal">
+    <h2 class="section-title">Countdown</h2>
+
+    <div class="countdown">
+      <div class="count-card">
+        <h2 id="days">00</h2>
+        <p>Days</p>
+      </div>
+
+      <div class="count-card">
+        <h2 id="hours">00</h2>
+        <p>Hours</p>
+      </div>
+
+      <div class="count-card">
+        <h2 id="minutes">00</h2>
+        <p>Minutes</p>
+      </div>
+
+      <div class="count-card">
+        <h2 id="seconds">00</h2>
+        <p>Seconds</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="details" class="reveal">
+    <h2 class="section-title">Wedding Details</h2>
+
+    <div class="details-grid">
+      <div class="detail-card">
+        <h3>Date</h3>
+        <p>
+          Thursday<br>
+          May 21, 2026
+        </p>
+      </div>
+
+      <div class="detail-card">
+        <h3>Venue</h3>
+        <p>
+          Grand Celebration Hall<br>
+          Cairo, Egypt
+        </p>
+      </div>
+
+      <div class="detail-card">
+        <h3>Time</h3>
+        <p>
+          Reception Starts<br>
+          7:00 PM
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery" class="reveal">
+    <h2 class="section-title">Moments</h2>
+
+    <div class="gallery">
+      <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?q=80&w=1200&auto=format&fit=crop" alt="">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop" alt="">
+      <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=1200&auto=format&fit=crop" alt="">
+      <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1200&auto=format&fit=crop" alt="">
+    </div>
+  </section>
+
+  <footer>
+    Made with love for the beginning of forever.
+  </footer>
+
+  <button class="music-btn" onclick="toggleMusic()">♫</button>
+
+  <audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8e5e8a4.mp3?filename=romantic-love-11786.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const targetDate = new Date('May 21, 2026 19:00:00').getTime();
+
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('days').innerText = days;
+      document.getElementById('hours').innerText = hours;
+      document.getElementById('minutes').innerText = minutes;
+      document.getElementById('seconds').innerText = seconds;
+    }, 1000);
+
+    const reveals = document.querySelectorAll('.reveal');
+
+    window.addEventListener('scroll', () => {
+      reveals.forEach(reveal => {
+        const windowHeight = window.innerHeight;
+        const revealTop = reveal.getBoundingClientRect().top;
+
+        if (revealTop < windowHeight - 100) {
+          reveal.classList.add('active');
+        }
+      });
+    });
+
+    const music = document.getElementById('bgMusic');
+    let playing = false;
+
+    function toggleMusic() {
+      if (!playing) {
+        music.play();
+        playing = true;
+      } else {
+        music.pause();
+        playing = false;
+      }
+    }
+  </script>
+
+</body>
+</html>
